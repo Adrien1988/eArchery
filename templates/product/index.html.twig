@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des produits{% endblock %}
+
+{% block body %}
+<h1 class="text-center my-3">Liste des produits</h1>
+	<div class="container">
+		{{ form_start(formRecherche)}}
+
+		<div class="form-group">
+			{{ form_widget(formRecherche.recherche, {
+  'attr': {
+    'placeholder': "Rechercher un produit", 'class': 'form-control mb-2'
+  }
+})}}</div>
+	
+	<button type="submit" class="btn btn-primary mt-2 mb-3">recherche</button>
+
+	{{ form_end(formRecherche)}}
+</div>
+	<div class="row">
+
+		{% for produit in produits %}
+
+			<div class="col-md-4">
+				<div class="card mb-3" style="width: 18rem;">
+					<h3 class="card-header">{{ produit.nom }}</h3>
+					<img src=" {{ asset('images/produit/') ~ produit.image }} " alt="Image du produit" class="img-fluid">
+					<div class="card-body">
+						<p class="card-text text-end fw-bold">{{ produit.prix }}€</p>
+					</div>
+
+					<div class="card-body text-end">
+						<a href="{{ path('product_show', {'id': produit.id}) }}" class="card-link btn btn-primary">Voir détails</a>
+					</div>
+				</div>
+			</div>
+
+		{% endfor %}
+
+	</div>
+{% endblock %}
